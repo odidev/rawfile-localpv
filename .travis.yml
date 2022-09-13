@@ -6,19 +6,18 @@ dist: bionic
 language: minimal
 jobs:
   include:
-    - stage: build
-      arch:
-        - amd64
-        - arm64 
+    - stage: build 
       script: ./.ci/build.sh
+      env:
+        - TRAVIS_CPU_ARCH=amd64
+        - TRAVIS_CPU_ARCH=arm64
     - stage: e2e-test
-      arch:
-        - amd64
-        - arm64
       install: ./.ci/e2e-test/setup.sh
       if: tag IS present OR commit_message =~ /perform-e2e/
       script: ./.ci/e2e-test/test.sh
       env:
+        - TRAVIS_CPU_ARCH=amd64
+        - TRAVIS_CPU_ARCH=arm64
         - CHANGE_MINIKUBE_NONE_USER=true
         - MINIKUBE_WANTUPDATENOTIFICATION=false
         - MINIKUBE_WANTREPORTERRORPROMPT=false
@@ -26,7 +25,7 @@ jobs:
         - CHANGE_MINIKUBE_NONE_USER=true
         - KUBECONFIG=$HOME/.kube/config
     - stage: publish
-      arch:
-        - amd64
-        - arm64
       script: ./.ci/publish.sh
+      env:
+        - TRAVIS_CPU_ARCH=amd64
+        - TRAVIS_CPU_ARCH=arm64
