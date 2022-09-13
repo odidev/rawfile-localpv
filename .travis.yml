@@ -4,14 +4,17 @@ services:
 
 dist: bionic
 language: minimal
-arch:
-  - amd64
-  - arm64 
 jobs:
   include:
     - stage: build
+      arch:
+        - amd64
+        - arm64 
       script: ./.ci/build.sh
     - stage: e2e-test
+      arch:
+        - amd64
+        - arm64
       install: ./.ci/e2e-test/setup.sh
       if: tag IS present OR commit_message =~ /perform-e2e/
       script: ./.ci/e2e-test/test.sh
