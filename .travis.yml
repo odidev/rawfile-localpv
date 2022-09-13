@@ -1,5 +1,10 @@
-os: linux
-dist: bionic
+matrix:
+    include:
+        - python: 3.8
+          dist: bionic
+        - python: 3.8
+          arch: arm64
+          dist: bionic
 language: minimal
 jobs:
   include:
