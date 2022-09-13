@@ -10,6 +10,10 @@ jobs:
   include:
     - stage: build 
       script: ./.ci/build.sh
+      env:
+        - matrix:
+              - arch=amd64
+              - arch=arm64
     - stage: e2e-test
       install: ./.ci/e2e-test/setup.sh
       if: tag IS present OR commit_message =~ /perform-e2e/
@@ -22,7 +26,11 @@ jobs:
         - CHANGE_MINIKUBE_NONE_USER=true
         - KUBECONFIG=$HOME/.kube/config
         - matrix:
-              - ARCH=amd64
-              - ARCH=arm64
+              - arch=amd64
+              - arch=arm64
     - stage: publish
       script: ./.ci/publish.sh
+      env:
+        - matrix:
+              - arch=amd64
+              - arch=arm64
