@@ -3,9 +3,6 @@ services:
   - docker
 
 dist: bionic
-arch:
-  - amd64
-  - arm64
 env:
   - TRAVIS_CPU_ARCH=arm64
   - TRAVIS_CPU_ARCH=amd64
