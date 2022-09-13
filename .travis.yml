@@ -5,10 +5,7 @@ services:
 dist: bionic
 
 language: minimal
-env:
-  matrix:
-    - ARCH=amd64
-    - ARCH=arm64
+
 jobs:
   include:
     - stage: build 
@@ -24,5 +21,8 @@ jobs:
         - MINIKUBE_HOME=$HOME
         - CHANGE_MINIKUBE_NONE_USER=true
         - KUBECONFIG=$HOME/.kube/config
+        - matrix:
+              - ARCH=amd64
+              - ARCH=arm64
     - stage: publish
       script: ./.ci/publish.sh
