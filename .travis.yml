@@ -1,4 +1,7 @@
 os: linux
+arch:
+  - arm64
+  - amd64
 services:
   - docker
 
@@ -9,14 +12,12 @@ language: minimal
 jobs:
   include:
     - stage: build 
-      arch:
-         - arm64
-         - amd64
+      arch: arm64
+      arch: amd64
       script: ./.ci/build.sh
     - stage: e2e-test
-      arch:
-         - arm64
-         - amd64
+      arch: arm64
+      arch: amd64
       install: ./.ci/e2e-test/setup.sh
       script: ./.ci/e2e-test/test.sh
       env:
@@ -27,7 +28,6 @@ jobs:
         - CHANGE_MINIKUBE_NONE_USER=true
         - KUBECONFIG=$HOME/.kube/config
     - stage: publish
-      arch:
-         - arm64
-         - amd64
+      arch: arm64
+      arch: amd64
       script: ./.ci/publish.sh
