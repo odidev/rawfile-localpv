@@ -1,7 +1,10 @@
-os: linux
-arch:
-  - arm64
-  - amd64
+matrix:
+  include:
+   - os: linux
+     arch: amd64
+   - os: linux
+     arch: arm64
+
 services:
   - docker
 
